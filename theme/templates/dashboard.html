@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static tailwind_tags %}
+{% block title %} Home {% endblock %}
+{% block content %}
+<div class="px-10 py-6">
+            <div class="grid grid-cols-2 gap-6 mt-6 ">
+                <div class="card">
+
+                    <img id="output" class="h-[60vh]" src="data:image/jpeg;base64, {{image}}" alt="image">
+                </div>
+                <textarea readonly class="card">
+                     {{ text }}
+                </textarea>
+
+            </div>
+            <div class="flex justify-center">
+                <form class="flex space-x-4 place-items-center justify-between m-4" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                    <input type="file" name="image" accept="image/*" required="" id="id_image" onchange="loadFile(event)" class="input-file">
+                        {% for error in form.image.errors %}
+                        <small style="color: red">{{ error }}</small>
+                    {% endfor %}
+                    {{ form.primary_lang }}
+                    {{ form.secondary_lang }}
+                    <button type="submit" class="btn-primary">Convert</button>
+
+
+                </form>
+            </div>
+
+{#            <div class="flex justify-center">#}
+{#                <button type="submit" class=" mt-6 bg-blue-700 py-2 px-6 text-white rounded-lg">Convert</button>#}
+{#            </div>#}
+        </div>
+        <script>
+    let loadFile = function (event) {
+        let image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+{% endblock %}

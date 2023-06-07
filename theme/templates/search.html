@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static tailwind_tags %}
+{% block title %} Home {% endblock %}
+{% block content %}
+
+    <div class="mx-10 my-6 text-xl font-semibold whitespace-nowrap dark:text-white"> Search Results of
+        : {{ query }}</div>
+    <div class="px-10 py-6 grid grid-cols-4 gap-1">
+        {% for object in page_obj %}
+            <div
+                    class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                <a href="#!">
+                    <img
+                            class="rounded-t-lg"
+                            src="{{ object.image.url }}"
+                            alt=""/>
+                </a>
+                <div class="p-6">
+                    <a class="btn-danger " href="/uploads/delete/{{ object.id }}/">
+                        Delete
+                    </a>
+                    <a class="btn-primary " href="/uploads/{{ object.id }}/">
+                        View
+                    </a>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+    <div class="text-center m-6 text-2xl">
+        {%if page_obj.has_previous %} {# whether the previous page exists #}
+            <a href="?page={{page_obj.previous_page_number}}" class="btn-alternative"><</a> {# link to the prev page #}
+        {% endif %}
+        <span class="m-4">{{page_obj.number}}</span> {# the current page number #}
+
+        {%if page_obj.has_next %} {# whether the next page exists #}
+            <a href="?page={{page_obj.next_page_number}}" class="btn-alternative">></a> {# link to the next page #}
+        {% endif %}
+    </div>
+{% endblock %}

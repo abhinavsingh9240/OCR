@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static tailwind_tags %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+    <header class="flex flex-col justify-center place-items-center gap-4 mt-10">
+        <h1 class="text-3xl">Account Details: </h1>
+        <div class="grid grid-cols-2 w-96 text-lg m-4">
+            <div>
+                First Name:
+            </div>
+            <div>
+                {{ user.first_name }}
+            </div>
+            <div>
+                Last Name:
+            </div>
+            <div>
+                {{ user.last_name }}
+            </div>
+            <div>
+                Email:
+            </div>
+            <div>
+                {{ user.email }}
+            </div>
+
+            <div>
+                Username:
+            </div>
+            <div>
+                {{ user.username }}
+            </div>
+
+        </div>
+        <div class="flex flex-wrap">
+            <a href="/settings/username" class="m-2 btn-primary">Change Username</a>
+            <a href="/settings/password" class="m-2 btn-primary">Change Password</a>
+            <a href="/settings/name" class="m-2 btn-primary">Change Name</a>
+            <button onclick="myFunction()" class="m-2 btn-danger">Delete Account</button>
+
+        </div>
+    </header>
+    <script>
+        function myFunction() {
+            let text;
+            if (confirm("Are You Sure you want to delete the account!") === true) {
+                location.href = "/settings/delete";
+            }
+        }
+    </script>
+{% endblock %}

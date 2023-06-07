@@ -1,0 +1,43 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %} {% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% tailwind_css %}
+</head>
+
+<body class="bg-gray-100">
+    {% if user.is_authenticated %}
+        <nav class="px-10 flex w-full flex-wrap items-center justify-between bg-neutral-100 py-2 sticky shadow-lg text-neutral-800 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
+            <div class="text-xl"> Welcome {{ user.first_name }} {{ user.last_name }} ( {{ user.username }} )</div>
+
+            <form method="POST" action="../search/ ">
+                {% csrf_token %}
+                <input type="search" name="query" class="rounded w-96 h-10 text-black" placeholder="Type here for search">
+                <button type="submit" class="btn-alternative h-10">Search</button>
+            </form>
+            {% comment %} <a href="{% url 'logout' %}" class="underline">Logout</a> {% endcomment %}
+
+            <ul class="flex space-x-2">
+                <a href="/dashboard/" class="nav-element">Dashboard</a>
+                <a href="/uploads/" class="nav-element">Uploads</a>
+                <a href="/settings/" class="nav-element">Settings</a>
+                <a href="/logout/" class="btn-danger">Logout</a>
+            </ul>
+        </nav>
+        {% block content %}
+
+        {% endblock %}
+    {% else %}
+        <div class="alert alert-success" role="alert">
+            <h3>Welcome!</h3>
+            <a href="{% url 'register' %}">Signup</a>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+    {% endif %}
+
+</body>
+</html>
