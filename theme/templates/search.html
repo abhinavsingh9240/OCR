@@ -3,12 +3,12 @@
 {% block title %} Home {% endblock %}
 {% block content %}
 
-    <div class="mx-10 my-6 text-xl font-semibold whitespace-nowrap dark:text-white"> Search Results of
+    <div class="mx-10 my-6 text-xl font-semibold whitespace-nowrap"> Search Results of
         : {{ query }}</div>
     <div class="px-10 py-6 grid grid-cols-4 gap-1">
         {% for object in page_obj %}
             <div
-                    class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                    class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
                 <a href="#!">
                     <img
                             class="rounded-t-lg"
