@@ -23,13 +23,12 @@ class LoginForm(forms.Form):
 class DataForm(forms.ModelForm):
     class Meta:
         model = Data
-        fields = ['image', 'primary_lang', 'secondary_lang']
+        fields = ['image']  # , 'primary_lang', 'secondary_lang']
 
 
 class PasswordForm(forms.Form):
-    password1 = forms.CharField(max_length=63,widget=forms.PasswordInput)
-    password2 = forms.CharField(max_length=63,widget=forms.PasswordInput)
-
+    password1 = forms.CharField(max_length=63, widget=forms.PasswordInput)
+    password2 = forms.CharField(max_length=63, widget=forms.PasswordInput)
 
 
 class UsernameForm(forms.ModelForm):

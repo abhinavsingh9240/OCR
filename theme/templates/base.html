@@ -11,12 +11,12 @@
 
 <body class="bg-gray-100">
     {% if user.is_authenticated %}
-        <nav class="px-10 flex w-full flex-wrap items-center justify-between bg-neutral-100 py-2 sticky shadow-lg text-neutral-800 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
+        <nav class="px-10 flex w-full items-center justify-between bg-neutral-100 py-2 sticky shadow-lg text-neutral-800 focus:text-neutral-700 dark:bg-neutral-600 lg:py-4">
             <div class="text-xl"> Welcome {{ user.first_name }} {{ user.last_name }} ( {{ user.username }} )</div>
 
             <form method="POST" action="../search/ ">
                 {% csrf_token %}
-                <input type="search" name="query" class="rounded w-96 h-10 text-black" placeholder="Type here for search">
+                <input type="search" name="query" class="rounded h-10 text-black" placeholder="Type here for search">
                 <button type="submit" class="btn-alternative h-10">Search</button>
             </form>
             {% comment %} <a href="{% url 'logout' %}" class="underline">Logout</a> {% endcomment %}

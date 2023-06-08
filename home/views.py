@@ -88,15 +88,15 @@ def dashboard(request):
                 # print(instance.id)
                 object_id = instance.id
                 data_object = Data.objects.get(id=object_id)
-                print(data_object.image.url)
-                if instance.secondary_lang is None:
-                    language = instance.primary_lang
-                else:
-                    language = instance.primary_lang + "+" + instance.secondary_lang
-                text = get_text("." + data_object.image.url, language=language)
+                # print(data_object.image.url)
+                # if instance.secondary_lang is None:
+                #     language = instance.primary_lang
+                # else:
+                #     language = instance.primary_lang + "+" + instance.secondary_lang
+                text = get_text("." + data_object.image.url, language="ara+eng")
                 instance.text = text
                 instance.save()
-                img = get_boxes("." + data_object.image.url, language=language)
+                img = get_boxes("." + data_object.image.url, language="ara+eng")
 
         return render(request, 'dashboard.html', {'form': form, "text": text, "image": img})
     else:
