@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
@@ -12,6 +14,7 @@ from home import forms, models
 from home.engine import get_text, get_boxes
 from home.forms import UserRegistrationForm, DataForm
 from home.models import Data
+from ocr.settings import BASE_DIR
 
 
 # Create your views here.
@@ -93,10 +96,11 @@ def dashboard(request):
                 #     language = instance.primary_lang
                 # else:
                 #     language = instance.primary_lang + "+" + instance.secondary_lang
-                text = get_text("." + data_object.image.url, language="ara+eng")
+                path = os.path.join(BASE_DIR,data_object.image.url[1:])
+                text = get_text(path, language="ara+eng")
                 instance.text = text
                 instance.save()
-                img = get_boxes("." + data_object.image.url, language="ara+eng")
+                img = get_boxes(path, language="ara+eng")
 
         return render(request, 'dashboard.html', {'form': form, "text": text, "image": img})
     else:
